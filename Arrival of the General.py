@@ -1,0 +1,9 @@
+n=int(input())
+a=list(map(int,input().split()))
+s=0
+s+=a.index(max(a))
+x=max(a)
+a.remove(max(a))
+a=[x]+a
+s+=a[::-1].index(min(a))
+print(s)
