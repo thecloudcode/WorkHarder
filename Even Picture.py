@@ -1,0 +1,20 @@
+n=int(input())
+k=3*n+4
+print(k)
+print(0,0)
+print(1,0)
+print(0,1)
+print(1,1)
+print(1,2)
+print(2,1)
+n-=1
+x=2
+y=2
+while(n>0):
+    print(x,y)
+    print(x+1,y)
+    print(x,y+1)
+    x+=1
+    y+=1
+    n-=1
+print(x,y)

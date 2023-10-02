@@ -1,52 +1,48 @@
 for _ in range(int(input())):
-    l=-((10**9)-1)
-    h=10**9+1
     s=input()
-    if s[1]==' ':
-        if s[0]=='<':
-            if s[-1]=='N':
-                print("No, <")
-                print(int(s[2:-2:]))
-                l=max(l,int(s[2:-2:]))
-            else:
-                print("Yes, >")
-                print(int(s[2:-2:])-1)
-                h=min(h,int(s[2:-2:])-1)
-        if s[0]=='>':
-            if s[-1]=='N':
-                print("No, >")
-                print(int(s[2:-2:]))
-                h=min(h, int(s[2:-2:]))
-            else:
-                print("Yes, >")
-                print(int(s[2:-2:])+1)
-                l=max(l,int(s[2:-2:])+1)
-    elif s[2]==' ':
-        if s[0]+s[1]=='<=':
-            if s[-1]=='N':
-                print("No, <=")
-                print(int(s[3:-2:])+1)
-                l=max(l,int(s[3:-2:])+1)
-            else:
-                print("Yes, <=")
-                print(int(s[3:-2:]))
-                h=min(h,int(s[3:-2:]))
-        if s[0]+s[1]=='>=':
-            if s[-1]=='N':
-                print("No, >=")
-                print(int(s[3:-2:])-1)
-                h=min(int(s[3:-2:])-1,h)
-            else:
-                print("Yes, >=")
-                print(int(s[3:-2:]))
-                l=max(l,int(s[3:-2:]))
-    # print(l,h)
-    # print(int(s[3:-2:]))
-    # print(int(s[2:-2:]))
-    if l<=h:
-        if h!=((10**9)+1):
-            print(h)
-        else:
+    l=-10**9-1
+    gotl=False
+    h=10**9+1
+    goth=False
+
+    # s=input()
+    if s[0]+s[1]=='>=':
+        if s[-1]=='Y':
+            l=max(int(s[3:-2:]),l)
+            # print(l)
+            gotl=True
+        if s[-1]=='N':
+            h=min(int(s[3:-2:],h)-1,h)
+            goth=True
+    elif s[0]+s[1]=='<=':
+        if s[-1]=='Y':
+            h=min(int(s[3:-2:]),h)
+            goth=True
+        if s[-1]=='N':
+            l=max(int(s[3:-2:])+1,l)
+            gotl=True
+    elif s[0]=='>':
+        if s[-1]=='Y':
+            l=max(int(s[2:-2:])+1,l)
             print(l)
-    else:
-        print("Impossible")
+            gotl=True
+        if s[-1]=='N':
+            h=min(int(s[2:-2:]),h)
+            goth=True
+    elif s[0]=='<':
+        if s[-1]=='Y':
+            h=min(h,int(s[2:-2:])-1)
+            # print(h)
+            goth=True
+        else:
+            l=max(l,int(s[2:-2:]))
+            gotl=True
+print(l,h)
+if l>h:
+    print("IMPOSSIBLE")
+elif gotl:
+    print(l)
+elif goth:
+    print(h)
+else:
+    print("IMPOSSIBLE")
