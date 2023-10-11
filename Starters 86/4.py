@@ -1,32 +1,29 @@
-import math
-from collections import defaultdict
-
-for _ in range(int(input())):
-    # d = defaultdict(lambda:0)
-    # a = map(int, input().split())
-    n,mm = map(int,input().split())
-    x=list(map(int,input().split()))
-    # print(len(set(x)))
-    m=min(x)
-    c=0
-    flag=True
-
-    if m<=mm:
-        if(len(set(x))==1):
-            print(0)
-        else:
-            for i in x:
-                if i!=m:
-                    if(math.gcd(i,m))!=m:
-                        flag=False
-                        break
-                else:
-                    c+=1
-            if flag:
-                print(1)
-                print(m)
+﻿
+def min_operations_to_balance_string(T, test_cases):
+    results = []
+    for _ in range(T):
+        N, K, S = test_cases [_]
+        count_0 = [0]*K
+        count_1 = [0]*K
+        for i in range(N):
+            if S[i]=='0':
+                count_0[i % K] += 1
             else:
-                
-    else:
-        print(1)
-        print(1)
+                count_1[i % K] += 1
+        min_operations = float('inf')
+        for i in range(K):
+            min_operations = min(min_operations, sum(count_0) - count_0[i] + sum(count_1) - count_1[i])
+        results.append(min_operations)
+
+    return results
+
+test_cases=[]
+T=int(input())
+for _ in range(T):
+    N,K=map(int,input().split())
+    S=input().strip()
+    test_cases.append((N,K,S))
+
+results = min_operations_to_balance_string(,test_cases)
+for result in results:
+    print(result)
