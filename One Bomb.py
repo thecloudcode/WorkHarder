@@ -1,31 +1,43 @@
 from collections import defaultdict
-d=defaultdict(lambda:0)
-n,m=map(int,input().split())
-row=-1
-col=-1
-flag=True
+r=defaultdict(lambda:0)
+c=defaultdict(lambda:0)
+n,m = map(int,input().split())
+x=[]
+for _ in range(n):
+    x.append(list(input()))
+s=0
+
 for i in range(n):
-    s=input()
     for j in range(m):
-        if s[j]=='*':
-            d[j]+=1
-            d[i]+=1
-            if d[j]>1:
-                row=j
-                if col==-1:
-                    col=i
-            if d[i]>1:
-                col=i
-                if row==-1:
-                    row=j
-            if row!=-1:
-                if row!=j:
-                    flag=False
-                else:
-                    continue
-            if col!=-1:
-                if col!=i:
-                    flag=False
-print("YES" if flag else "NO")
-if flag:
-    print(col,row)
+        if x[i][j]=='*':
+            s+=1
+            r[i]+=1
+            c[j]+=1
+
+# print(dict(r),dict(c))
+if n+m-1<s:
+    print("NO")
+elif s==0:
+    print("YES")
+    print(1,1)
+else:
+    flag=False
+    ii=0
+    jj=0
+    for i in range(n):
+        for j in range(m):
+            # print(i,j,r[i],c[j])
+            xxx=1 if x[i][j]=='*' else 0
+            if r[i]+c[j]-xxx==s:
+                flag=True
+                ii=i
+                jj=j
+                break
+        if flag:
+            break
+    if flag:
+        print("YES")
+        print(ii+1,jj+1)
+    else:
+        # print(s)
+        print("NO")
